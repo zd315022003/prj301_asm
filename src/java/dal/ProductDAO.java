@@ -4,21 +4,18 @@
  */
 package dal;
 
+import dto.CartItemDTO;
 import dto.ProductDTO;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author Admin
  */
 public class ProductDAO extends DBContext {
@@ -82,4 +79,40 @@ public class ProductDAO extends DBContext {
         return result;
     }
 
+    public List<CartItemDTO> getCartItems(Set<Integer> listIds) {
+        List<CartItemDTO> result = new ArrayList<>();
+        try {
+            StringBuilder script = new StringBuilder("SELECT [product_id],\n" +
+                    "       [title],\n" +
+                    "       [sale],\n" +
+                    "       [thumbnail]\n" +
+                    "FROM [dbo].[Product]\n" +
+                    "WHERE [product_id] in (");
+            if (listIds == null || listIds.isEmpty()) {
+                return result;
+            }
+            script.append(listIds.stream().map(id -> "?")
+                    .collect(Collectors.joining(",\n")));
+            script.append(");");
+            PreparedStatement ps = connection.prepareStatement(script.toString());
+            for (int i = 0; i < listIds.size(); i++) {
+                ps.setInt(i + 1, (int) listIds.toArray()[i]);
+            }
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CartItemDTO cartItemDTO = new CartItemDTO();
+                cartItemDTO.setProductID(rs.getInt("product_id"));
+                cartItemDTO.setProductName(rs.getString("title"));
+                cartItemDTO.setProductPrice(rs.getDouble("sale"));
+                cartItemDTO.setProductImage(rs.getString("thumbnail"));
+                cartItemDTO.setQuantity(0);
+                result.add(cartItemDTO);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
 }

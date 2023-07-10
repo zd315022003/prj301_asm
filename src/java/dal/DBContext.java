@@ -22,7 +22,7 @@ public abstract class DBContext {
             //NOTE: CHANGE VALUES OF user,pass,url TO FIT YOUR SYSTEM ENVIRONMENT
             //DO NOT CHANGE THE STRUCTURE OF THE CONSTRUCTOR
             String user = "sa";
-            String pass = "123";
+            String pass = "hoangkmHE141430_2208";
             String url = "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=ASSIGNMENT_PRJ301_4";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
