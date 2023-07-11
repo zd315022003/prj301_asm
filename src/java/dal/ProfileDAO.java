@@ -45,13 +45,23 @@ public class ProfileDAO extends DBContext {
     }
 
     public void change(ProfileDTO acc) {
-        String sql = "  update [account] \n"
-                + "  set [password] = ?\n"
+        String sql = "    update [account] \n"
+                + "  set [image_url] = ?,\n"
+                + "  [username] = ?,\n"
+                + "  first_name = ?,\n"
+                + "  last_name = ?,\n"
+                + "  email = ?,\n"
+                + "  [password] = ?\n"
                 + "  where [username] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, acc.getNewpass());
+            ps.setString(1, acc.getImage_url());
             ps.setString(2, acc.getUsername());
+            ps.setString(3, acc.getFirst_name());
+            ps.setString(4, acc.getLast_name());
+            ps.setString(5, acc.getEmail());
+            ps.setString(6, acc.getNewpass());
+            ps.setString(7, acc.getUsername());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

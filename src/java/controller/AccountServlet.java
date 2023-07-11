@@ -79,25 +79,29 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String img_url = request.getParameter("img_url");
-        String username = request.getParameter("pusername");
-        String firstName = request.getParameter("pfname");
-        String lastName = request.getParameter("plname");
-        String email = request.getParameter("pemail");
-        String currentpass = request.getParameter("currentpass");
-        String newpass = request.getParameter("newpass");
-        ProfileDAO pd = new ProfileDAO();
-        if(pd.checkPassword(username, currentpass)){
-            try {
-                ProfileDTO pdto = new ProfileDTO( img_url, username, firstName, lastName, email, MD5Hash.hash(currentpass), MD5Hash.hash(newpass));
-                pd.change(pdto);
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            String img_url = request.getParameter("img_url");
+            String username = request.getParameter("pusername");
+            String firstName = request.getParameter("pfname");
+            String lastName = request.getParameter("plname");
+            String email = request.getParameter("pemail");
+            String currentpass = request.getParameter("currentpass");
+            String newpass = request.getParameter("newpass");
+            ProfileDAO pd = new ProfileDAO();
+            if(pd.checkPassword(username, MD5Hash.hash(currentpass))){
+                try {
+                    ProfileDTO pdto = new ProfileDTO( img_url, username, firstName, lastName, email, MD5Hash.hash(currentpass), MD5Hash.hash(newpass));
+                    pd.change(pdto);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                request.setAttribute("errorMessage", "Existed account!");
             }
-        }else{
-            request.setAttribute("errorMessage", "Existed account!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     /** 
