@@ -42,7 +42,7 @@
 <!--                                            <div id="replybutton" class="btn4 like">
                                                 <button style="text-align: right" class="btn reply" id="replyb">Update Avatar
                                             </div>-->
-                                            <input type="text"  id="reply" name="img_url" class="form-control pull-right"  value="${profile.image_url} style="display:none;"/>
+                                            <input type="text"  id="reply" name="img_url" class="form-control pull-right"  value="${profile.image_url}"/>
 <!--                                            <script>
                                                 $(document).ready(function () {
                                                     $('#replyb').click(function () {
