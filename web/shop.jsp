@@ -240,7 +240,7 @@
                                         <a class="add-cart">
                                             <label for="add-${product.id}-to-cart">+ Add To Cart </label>
                                             <input type="hidden" name="action" value="add"/>
-                                            <input type="hidden" name="continueUrl" value="home"/>
+                                            <input type="hidden" name="continueUrl" value="shop"/>
                                             <input type="submit" style="display: none"
                                                    id="add-${product.id}-to-cart"
                                                    formaction="shopping-cart"

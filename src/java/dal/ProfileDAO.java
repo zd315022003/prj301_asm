@@ -15,8 +15,9 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-public class ProfileDAO extends DBContext{
-        public ProfileDTO getprofile(String username) {
+public class ProfileDAO extends DBContext {
+
+    public ProfileDTO getprofile(String username) {
         try {
             String query = "SELECT image_url, first_name, last_name, email FROM Account\n"
                     + "WHERE username = ?\n";
@@ -41,5 +42,35 @@ public class ProfileDAO extends DBContext{
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void change(ProfileDTO acc) {
+        String sql = "  update [account] \n"
+                + "  set [password] = ?\n"
+                + "  where [username] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, acc.getNewpass());
+            ps.setString(2, acc.getUsername());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean checkPassword(String username, String pass) {
+        try {
+            String query = " select * from Account\n"
+                    + "  where username = ?\n"
+                    + "  and password = ?;";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, pass);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

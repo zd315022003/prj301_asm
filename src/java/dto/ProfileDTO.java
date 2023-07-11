@@ -14,16 +14,20 @@ public class ProfileDTO {
     private String first_name;
     private String last_name;
     private String email;
+    private String currentpass;
+    private String newpass;
 
     public ProfileDTO() {
     }
 
-    public ProfileDTO(String image_url, String username, String first_name, String last_name, String email) {
+    public ProfileDTO(String image_url, String username, String first_name, String last_name, String email, String currentpass, String newpass) {
         this.image_url = image_url;
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.currentpass = currentpass;
+        this.newpass = newpass;
     }
 
     public String getImage_url() {
@@ -64,6 +68,22 @@ public class ProfileDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCurrentpass() {
+        return currentpass;
+    }
+
+    public void setCurrentpass(String currentpass) {
+        this.currentpass = currentpass;
+    }
+
+    public String getNewpass() {
+        return newpass;
+    }
+
+    public void setNewpass(String newpass) {
+        this.newpass = newpass;
     }
 
     

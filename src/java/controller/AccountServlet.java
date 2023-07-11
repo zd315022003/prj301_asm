@@ -15,6 +15,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import ulti.MD5Hash;
 
 /**
  *
@@ -75,7 +79,25 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String img_url = request.getParameter("img_url");
+        String username = request.getParameter("pusername");
+        String firstName = request.getParameter("pfname");
+        String lastName = request.getParameter("plname");
+        String email = request.getParameter("pemail");
+        String currentpass = request.getParameter("currentpass");
+        String newpass = request.getParameter("newpass");
+        ProfileDAO pd = new ProfileDAO();
+        if(pd.checkPassword(username, currentpass)){
+            try {
+                ProfileDTO pdto = new ProfileDTO( img_url, username, firstName, lastName, email, MD5Hash.hash(currentpass), MD5Hash.hash(newpass));
+                pd.change(pdto);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            request.setAttribute("errorMessage", "Existed account!");
+        }
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     /** 
