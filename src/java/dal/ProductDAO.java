@@ -23,8 +23,8 @@ import java.util.stream.Collectors;
  */
 public class ProductDAO extends DBContext {
 
-    public List<ProductDTO> getProductByFilter(String search, List<Integer> categories, List<Integer> brands) {
-        Map<Integer, ProductDTO> result = new HashMap<>();
+    public List<ProductDTO> getProductByFilter(String search, List<Integer> categories, List<Integer> brands, String sortby) {
+        List<ProductDTO> result = new ArrayList<>();
         try {
             StringBuilder query = new StringBuilder("SELECT [product_id]\n"
                     + "      ,[title]\n"
@@ -52,6 +52,7 @@ public class ProductDAO extends DBContext {
                         .map(b -> "?").collect(Collectors.joining(",\n")));
                 query.append(")");
             }
+            query.append(sortby);
             query.append(";");
             System.out.println(query.toString());
             try (PreparedStatement ps = connection.prepareStatement(query.toString())) {
@@ -71,14 +72,14 @@ public class ProductDAO extends DBContext {
                         productDTO.setSale(rs.getDouble("sale"));
                         productDTO.setThumbnail(rs.getString("thumbnail"));
                         productDTO.setTitle(rs.getString("title"));
-                        result.put(productDTO.getId(), productDTO);
+                        result.add(productDTO);
                     }
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new ArrayList<>(result.values());
+        return result;
     }
 
 }

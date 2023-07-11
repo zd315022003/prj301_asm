@@ -24,7 +24,7 @@ import java.util.Arrays;
  */
 public class LoginFilter implements Filter {
     
-    private final String [] WHITE_LIST = {"login", "signup", "home", "/", "logout"};
+    private final String [] WHITE_LIST = {"login", "signup", "home", "/", "logout", "shop"};
     private final String [] RESOURCE_LIST = {"/components", "/css", "/fonts", "/js", "/img", "/jquery", "/sass", "/admin"};
 //    private final String [] ADMIN_LIST = {"admin"};
     private static final boolean debug = true;

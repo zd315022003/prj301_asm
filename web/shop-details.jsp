@@ -94,14 +94,6 @@
                         <div class="col-lg-8">
                             <div class="product__details__text">
                                 <h4>Hooded thermal anorak</h4>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <span> - 5 Reviews</span>
-                                </div>
                                 <h3>$270.00 <span>70.00</span></h3>
                                 <p>Coat with quilted lining and an adjustable hood. Featuring long sleeves with adjustable
                                     cuff tabs, adjustable asymmetric hem with elastic side tabs and a front zip fastening
@@ -139,6 +131,10 @@
                                         <label class="c-9" for="sp-9">
                                             <input type="radio" id="sp-9">
                                         </label>
+                                    </div> 
+                                    <div>
+                                        <br>
+                                        <span><b>Categories:</b></span> Clothes
                                     </div>
                                 </div>
                                 <div class="product__details__cart__option">
@@ -150,22 +146,16 @@
                                     <a href="#" class="primary-btn">add to cart</a>
                                 </div>
                                 <div class="product__details__btns__option">
-                                    <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
-                                    <a href="#"><i class="fa fa-exchange"></i> Add To Compare</a>
+                                    <a href="#"><i class="fa fa-heart"></i> add to favourlist</a>
                                 </div>
                                 <div class="product__details__last__option">
                                     <h5><span>Guaranteed Safe Checkout</span></h5>
                                     <img src="img/shop-details/details-payment.png" alt="">
-                                    <ul>
-                                        <li><span>SKU:</span> 3812912</li>
-                                        <li><span>Categories:</span> Clothes</li>
-                                        <li><span>Tag:</span> Clothes, Skin, Body</li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+<!--                    <div class="row">
                         <div class="col-lg-12">
                             <div class="product__details__tab">
                                 <ul class="nav nav-tabs" role="tablist">
@@ -284,7 +274,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </section>

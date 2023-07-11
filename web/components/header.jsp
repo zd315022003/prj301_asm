@@ -50,7 +50,7 @@
                         </c:if>
                         <c:if test="${sessionScope.account != null}">
                             <div class="header__top__links dropdown" style="z-index: 2">
-                                <a href="./profile.jsp"><img style="max-height: 20px; max-width: 20px;" src="./img/icons8-account-30.png" alt=""></a>
+                                <a href="profile"><img style="max-height: 20px; max-width: 20px;" src="./img/icons8-account-30.png" alt=""></a>
                                 <div class="dropdown-content" style="text-align: left">
                                     <c:if test="${sessionScope.account.roleId == 1}">
                                         <a  href="admin/home">Admin site</a>
