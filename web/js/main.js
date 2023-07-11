@@ -177,6 +177,7 @@
             }
         }
         $button.parent().find('input').val(newVal);
+
     });
 
     var proQty = $('.pro-qty-2');

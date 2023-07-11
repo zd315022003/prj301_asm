@@ -211,7 +211,7 @@
                                         <div class="shop__product__option__right">
                                             <p>Sort by :</p>
                                             <select name="sortby" onchange="document.getElementById('shopform').submit()">
-                                                <!--                                            <option value="0">Default</option> 
+                                                <!--                                            <option value="0">Default</option>
                                                                                             <option value="1">Low To High</option>
                                                                                             <option value="2">High To Low</option>
                                                                                             <option value="3">Lasted</option>-->
@@ -658,7 +658,7 @@
                                                                     </div>
                                                                 </div>
                                 </c:forEach>
-    
+
                                 -->
                             </div>
                             <div class="row">
