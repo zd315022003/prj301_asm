@@ -88,13 +88,10 @@ public class AccountServlet extends HttpServlet {
             String currentpass = request.getParameter("currentpass");
             String newpass = request.getParameter("newpass");
             ProfileDAO pd = new ProfileDAO();
-            if(pd.checkPassword(username, MD5Hash.hash(currentpass)) || (currentpass.equals("") && newpass.equals(""))){
-                try {
+
+            if(pd.checkPassword(username, MD5Hash.hash(currentpass)) || (newpass != null && newpass.isEmpty())){
                     ProfileDTO pdto = new ProfileDTO( img_url, username, firstName, lastName, email, MD5Hash.hash(currentpass), MD5Hash.hash(newpass));
                     pd.change(pdto);
-                } catch (NoSuchAlgorithmException ex) {
-                    Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }else{
                 request.setAttribute("errorMessage", "Existed account!");
             }

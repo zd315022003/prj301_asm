@@ -48,9 +48,9 @@ public class ProfileDAO extends DBContext {
         String sql = "    update [dbo].[account] \n"
                 + "  set [image_url] = ?,\n"
                 + "  [username] = ?,\n"
-                + "  first_name = ?,\n"
-                + "  last_name = ?,\n"
-                + "  email = ?,\n"
+                + "  [first_name] = ?,\n"
+                + "  [last_name] = ?,\n"
+                + "  [email] = ?,\n"
                 + "  [password] = ?\n"
                 + "  where [username] = ?";
         try {
