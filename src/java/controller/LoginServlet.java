@@ -10,6 +10,7 @@ import dto.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -83,6 +84,22 @@ public class LoginServlet extends HttpServlet {
         
         String username = request.getParameter("your_name");
         String password = request.getParameter("your_pass");
+        String rem= request.getParameter("remember-me");
+        Cookie cu= new Cookie("cuser", username);
+        Cookie cp= new Cookie("cpass", password);
+        Cookie cr= new Cookie("crem", rem);
+        if(rem!=null){
+            cu.setMaxAge(60*60*24*7);
+            cp.setMaxAge(60*60*24*7);
+            cr.setMaxAge(60*60*24*7);
+        } else {
+            cu.setMaxAge(0);
+            cp.setMaxAge(0);
+            cr.setMaxAge(0);
+        }
+        response.addCookie(cu);
+        response.addCookie(cp);
+        response.addCookie(cr);
         if(username == null || password == null){
             response.sendRedirect("login");
         } else try {

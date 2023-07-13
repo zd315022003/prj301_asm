@@ -4,6 +4,9 @@
  */
 package model;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 /**
  *
  * @author Admin
@@ -17,13 +20,15 @@ public class Product {
     private String thumbnail;
     private String description;
     private int quantity;
-    private int brading_id;
+    private int sold;
+    private LocalDate myObj = LocalDate.now();
+    private int branding_id;
     private int filter_price_id;
 
     public Product() {
     }
 
-    public Product(int product_id, String title, double price, double sale, String thumbnail, String description, int quantity, int brading_id, int filter_price_id) {
+    public Product(int product_id, String title, double price, double sale, String thumbnail, String description, int quantity, int sold, int branding_id, int filter_price_id) {
         this.product_id = product_id;
         this.title = title;
         this.price = price;
@@ -31,7 +36,8 @@ public class Product {
         this.thumbnail = thumbnail;
         this.description = description;
         this.quantity = quantity;
-        this.brading_id = brading_id;
+        this.sold = sold;
+        this.branding_id = branding_id;
         this.filter_price_id = filter_price_id;
     }
 
@@ -91,12 +97,28 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public int getBrading_id() {
-        return brading_id;
+    public int getSold() {
+        return sold;
     }
 
-    public void setBrading_id(int brading_id) {
-        this.brading_id = brading_id;
+    public void setSold(int sold) {
+        this.sold = sold;
+    }
+
+    public LocalDate getMyObj() {
+        return myObj;
+    }
+
+    public void setMyObj(LocalDate myObj) {
+        this.myObj = myObj;
+    }
+
+    public int getBranding_id() {
+        return branding_id;
+    }
+
+    public void setBranding_id(int branding_id) {
+        this.branding_id = branding_id;
     }
 
     public int getFilter_price_id() {
@@ -107,5 +129,11 @@ public class Product {
         this.filter_price_id = filter_price_id;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" + "product_id=" + product_id + ", title=" + title + ", price=" + price + ", sale=" + sale + ", thumbnail=" + thumbnail + ", description=" + description + ", quantity=" + quantity + ", sold=" + sold + ", myObj=" + myObj + ", branding_id=" + branding_id + ", filter_price_id=" + filter_price_id + '}';
+    }
+    
+    
     
 }

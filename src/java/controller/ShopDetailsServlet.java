@@ -21,7 +21,7 @@ import model.Product;
  *
  * @author Admin
  */
-public class HomeServlet extends HttpServlet {
+public class ShopDetailsServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +38,10 @@ public class HomeServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeServlet</title>");  
+            out.println("<title>Servlet ShopDetailsServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ShopDetailsServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,17 +58,15 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ProductDAO ps = new ProductDAO(); 
-        List<ProductDTO> l = new ArrayList<>();
-        l = ps.getProductBestSellers();
-        request.setAttribute("listproduct", l);
-        List<ProductDTO> ln = new ArrayList<>();
-        ln = ps.getProductNew();
-        request.setAttribute("newproduct", ln);
-        List<ProductDTO> ls = new ArrayList<>();
-        ls = ps.getProductSale();
-        request.setAttribute("saleproduct", ls);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        Product p = new Product();
+        ProductDAO ps = new ProductDAO();
+        List<ProductDTO> lp = new ArrayList<>();
+        p = ps.getProductById(1);
+        lp = ps.getProductByBrandingId(1, p.getBranding_id());
+        System.out.println(lp);
+        request.setAttribute("product", p);
+        request.setAttribute("lproduct", lp);
+        request.getRequestDispatcher("shop-details.jsp").forward(request, response);
     } 
 
     /** 

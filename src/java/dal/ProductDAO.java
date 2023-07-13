@@ -6,6 +6,7 @@ package dal;
 
 import dto.CartItemDTO;
 import dto.ProductDTO;
+import dto.ProfileDTO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import model.Product;
 
 /**
  * @author Admin
@@ -52,7 +54,7 @@ public class ProductDAO extends DBContext {
             query.append(sortby);
             query.append(";");
             System.out.println(query.toString());
-            try (PreparedStatement ps = connection.prepareStatement(query.toString())) {
+            try ( PreparedStatement ps = connection.prepareStatement(query.toString())) {
                 ps.setString(1, "%" + search + "%");
                 for (int i = 0; i < Optional.ofNullable(brands).map(List::size).orElse(0); i++) {
                     ps.setInt(i + 2, brands.get(i));
@@ -61,7 +63,7 @@ public class ProductDAO extends DBContext {
                     ps.setInt(i + Optional.ofNullable(brands)
                             .map(List::size).orElse(0) + 2, categories.get(i));
                 }
-                try (ResultSet rs = ps.executeQuery()) {
+                try ( ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         ProductDTO productDTO = new ProductDTO();
                         productDTO.setId(rs.getInt("product_id"));
@@ -79,15 +81,148 @@ public class ProductDAO extends DBContext {
         return result;
     }
 
+    public List<ProductDTO> getProductByBrandingId(int product_id, int branding_id) {
+        try {
+            List<ProductDTO> product = new ArrayList<>();
+            String query = "SELECT TOP 4 *\n"
+                    + "FROM Product\n"
+                    + "ORDER BY sold DESC;";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, branding_id);
+            ps.setInt(2, product_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductDTO productDTO = new ProductDTO();
+                productDTO.setId(rs.getInt("product_id"));
+                productDTO.setPrice(rs.getDouble("price"));
+                productDTO.setSale(rs.getDouble("sale"));
+                productDTO.setThumbnail(rs.getString("thumbnail"));
+                productDTO.setTitle(rs.getString("title"));
+                product.add(productDTO);
+            }
+            return product;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public Product getProductById(int product_id) {
+        try {
+            String query = "SELECT * FROM Product\n"
+                    + "WHERE product_id = ?\n";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, product_id);
+            ResultSet rs = ps.executeQuery();
+            Product product = null;
+            if (rs.next()) {
+                product = new Product();
+                String title = rs.getString("title");
+                double price = rs.getDouble("price");
+                double sale = rs.getDouble("sale");
+                int branding_id = rs.getInt("branding_id");
+                String thumbnail = rs.getString("thumbnail");
+                String description = rs.getString("description");
+                int quantity = rs.getInt("quantity");
+                int sold = rs.getInt("sold");
+                product.setProduct_id(product_id);
+                product.setTitle(title);
+                product.setPrice(price);
+                product.setSale(sale);
+                product.setBranding_id(branding_id);
+                product.setThumbnail(thumbnail);
+                product.setDescription(description);
+                product.setQuantity(quantity);
+                product.setSold(sold);
+            }
+            return product;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<ProductDTO> getProductBestSellers() {
+        try {
+            List<ProductDTO> product = new ArrayList<>();
+            String query = "SELECT TOP 8 *\n"
+                    + "FROM Product\n"
+                    + "ORDER BY sold DESC;";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductDTO productDTO = new ProductDTO();
+                productDTO.setId(rs.getInt("product_id"));
+                productDTO.setPrice(rs.getDouble("price"));
+                productDTO.setSale(rs.getDouble("sale"));
+                productDTO.setThumbnail(rs.getString("thumbnail"));
+                productDTO.setTitle(rs.getString("title"));
+                product.add(productDTO);
+            }
+            return product;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<ProductDTO> getProductSale() {
+        try {
+            List<ProductDTO> product = new ArrayList<>();
+            String query = "SELECT TOP 4 *\n"
+                    + "FROM Product\n"
+                    + "ORDER BY (price - sale) DESC;";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductDTO productDTO = new ProductDTO();
+                productDTO.setId(rs.getInt("product_id"));
+                productDTO.setPrice(rs.getDouble("price"));
+                productDTO.setSale(rs.getDouble("sale"));
+                productDTO.setThumbnail(rs.getString("thumbnail"));
+                productDTO.setTitle(rs.getString("title"));
+                product.add(productDTO);
+            }
+            return product;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<ProductDTO> getProductNew() {
+        try {
+            List<ProductDTO> product = new ArrayList<>();
+            String query = "SELECT TOP 4 *\n"
+                    + "FROM Product\n"
+                    + "ORDER BY create_at DESC;";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductDTO productDTO = new ProductDTO();
+                productDTO.setId(rs.getInt("product_id"));
+                productDTO.setPrice(rs.getDouble("price"));
+                productDTO.setSale(rs.getDouble("sale"));
+                productDTO.setThumbnail(rs.getString("thumbnail"));
+                productDTO.setTitle(rs.getString("title"));
+                product.add(productDTO);
+            }
+            return product;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public List<CartItemDTO> getCartItems(Set<Integer> listIds) {
         List<CartItemDTO> result = new ArrayList<>();
         try {
-            StringBuilder script = new StringBuilder("SELECT [product_id],\n" +
-                    "       [title],\n" +
-                    "       [sale],\n" +
-                    "       [thumbnail]\n" +
-                    "FROM [dbo].[Product]\n" +
-                    "WHERE [product_id] in (");
+            StringBuilder script = new StringBuilder("SELECT [product_id],\n"
+                    + "       [title],\n"
+                    + "       [sale],\n"
+                    + "       [thumbnail]\n"
+                    + "FROM [dbo].[Product]\n"
+                    + "WHERE [product_id] in (");
             if (listIds == null || listIds.isEmpty()) {
                 return result;
             }

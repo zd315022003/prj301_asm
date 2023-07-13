@@ -90,7 +90,7 @@ public class ShopServlet extends HttpServlet {
                 break;
             }
             case "3": {
-                sortbysql = "";
+                sortbysql = "ORDER BY create_at desc;";
                 break;
             }
             default:{

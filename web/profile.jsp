@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+        <link rel="icon" type="image/x-icon" href="./img/icons8-favicon-64.png">
         <link rel="stylesheet" href="./css/style_1.css">
         <link rel="stylesheet" href="./css/bootstrap.min.css">
     </head>
@@ -42,7 +43,7 @@
 <!--                                            <div id="replybutton" class="btn4 like">
                                                 <button style="text-align: right" class="btn reply" id="replyb">Update Avatar
                                             </div>-->
-                                            <input type="text"  id="reply" name="img_url" class="form-control pull-right"  value="${profile.image_url} style="display:none;"/>
+                                            <input type="text"  id="reply" name="img_url" class="form-control pull-right"  value="${profile.image_url}"/>
 <!--                                            <script>
                                                 $(document).ready(function () {
                                                     $('#replyb').click(function () {

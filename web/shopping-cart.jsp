@@ -57,7 +57,7 @@
                                 <tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
-                                            <img src="img/product/${cartItem.productImage}.jpg" alt="${cartItem.productName}">
+                                            <img src="img/product/${cartItem.productImage}" alt="${cartItem.productName}">
                                         </div>
                                         <div class="product__cart__item__text">
                                             <h6>${cartItem.productName}</h6>
