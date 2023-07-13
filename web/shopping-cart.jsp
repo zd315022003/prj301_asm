@@ -26,7 +26,7 @@
                     <h4>Shopping Cart</h4>
                     <div class="breadcrumb__links">
                         <a href="home">Home</a>
-                        <a href="./shop.jsp">Shop</a>
+                        <a href="shop">Shop</a>
                         <span>Shopping Cart</span>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                             <li>Total <span>$ 169.50</span></li>
                         </ul>
                         <%--TODO: add action checkout--%>
-                        <a href="./checkout.jsp" class="primary-btn">Proceed to checkout</a>
+                        <a href="checkout" class="primary-btn">Proceed to checkout</a>
                     </div>
                 </div>
             </div>

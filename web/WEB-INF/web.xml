@@ -88,6 +88,14 @@
         <servlet-name>ShopDetailsServlet</servlet-name>
         <url-pattern>/shopdetails</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>checkoutServlet</servlet-name>
+        <servlet-class>controller.CheckoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>checkoutServlet</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

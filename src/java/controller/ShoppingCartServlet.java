@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Product;
+import ulti.CookieUltis;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -36,40 +37,13 @@ public class ShoppingCartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        List<CartItemDTO> cartItems = parseCartItems(request);
+        List<CartItemDTO> cartItems = CookieUltis.parseCartItems(request);
         request.setAttribute("cartItems", cartItems);
         request.getRequestDispatcher("shopping-cart.jsp").forward(request, response);
 
     }
 
-    private List<CartItemDTO> parseCartItems(HttpServletRequest request) {
-        Cookie cart = Arrays.stream(request.getCookies())
-                .filter(cookie -> cookie.getName().equals("cart"))
-                .findFirst().orElse(new Cookie("cart", ""));
-        String cartValue = cart.getValue();
-        Map<Integer, Integer> rawCartItems = new HashMap<>();
-        while (cartValue.contains("{")) {
-            System.out.println(cartValue);
-            int productID = Integer.parseInt(
-                    cartValue.substring(
-                            cartValue.indexOf("{") + 1
-                            , cartValue.indexOf("_")));
-            int quantity = Integer.parseInt(
-                    cartValue.substring(
-                            cartValue.indexOf("_") + 1
-                            , cartValue.indexOf("}")));
-            rawCartItems.put(productID, quantity);
-            String regex = "\\{" + productID + "_\\d+}_*";
-            cartValue = cartValue.replaceAll(regex, "");
-        }
-        ProductDAO productDAO = new ProductDAO();
-        List<CartItemDTO> results = productDAO.getCartItems(rawCartItems.keySet());
-        results.forEach(item -> item.setQuantity(rawCartItems.get(item.getProductID())));
-        productDAO.closeConnection();
-        return results;
-    }
-
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -97,13 +71,13 @@ public class ShoppingCartServlet extends HttpServlet {
                 if (productById.getQuantity() < Integer.parseInt(quantity)) {
                     throw new Exception();
                 }
-                addToCart(cart, productID, quantity);
+                CookieUltis.addToCart(cart, productID, quantity);
             } catch (Exception e) {
                 response.sendRedirect(continueUrl + "&error=true");
                 return;
             }
         } else {
-            removeFromCart(cart, productID);
+            CookieUltis.removeFromCart(cart, productID);
         }
 
         cart.setMaxAge(60 * 60 * 24 * 30);
@@ -111,23 +85,7 @@ public class ShoppingCartServlet extends HttpServlet {
         response.sendRedirect("shopping-cart");
     }
 
-    private void removeFromCart(Cookie cart, String productID) {
-        String cartValue = cart.getValue();
-        String regex = "\\{" + productID + "_\\d+}_*";
-        cartValue = cartValue.replaceAll(regex, "");
-        cart.setValue(cartValue);
-    }
-
-    private void addToCart(Cookie cart, String productID, String quantity) {
-        removeFromCart(cart, productID);
-        String cartValue = cart.getValue();
-        cartValue += cartValue.isEmpty()
-                ? "{" + productID + "_" + quantity + "}"
-                : "_{" + productID + "_" + quantity + "}";
-        cart.setValue(cartValue);
-    }
-
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

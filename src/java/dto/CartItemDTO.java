@@ -58,4 +58,8 @@ public class CartItemDTO {
     public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
+
+    public double getTotal() {
+        return quantity * productPrice;
+    }
 }

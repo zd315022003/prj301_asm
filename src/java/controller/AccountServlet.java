@@ -90,7 +90,7 @@ public class AccountServlet extends HttpServlet {
             ProfileDAO pd = new ProfileDAO();
 
             if(pd.checkPassword(username, MD5Hash.hash(currentpass)) || (newpass != null && newpass.isEmpty())){
-                    ProfileDTO pdto = new ProfileDTO( img_url, username, firstName, lastName, email, MD5Hash.hash(currentpass), MD5Hash.hash(newpass));
+                    ProfileDTO pdto = new ProfileDTO(img_url, username, firstName, lastName, email, MD5Hash.hash(currentpass), MD5Hash.hash(newpass));
                     pd.change(pdto);
             }else{
                 request.setAttribute("errorMessage", "Existed account!");

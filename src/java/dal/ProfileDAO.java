@@ -19,7 +19,7 @@ public class ProfileDAO extends DBContext {
 
     public ProfileDTO getprofile(String username) {
         try {
-            String query = "SELECT image_url, first_name, last_name, email FROM Account\n"
+            String query = "SELECT image_url, first_name, last_name, email, phone_number FROM Account\n"
                     + "WHERE username = ?\n";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, username);
@@ -31,11 +31,13 @@ public class ProfileDAO extends DBContext {
                 String Pfirst_name = rs.getString("first_name");
                 String Plast_name = rs.getString("last_name");
                 String Pemail = rs.getString("email");
+                String Pphone = rs.getString("phone_number");
                 profile.setImage_url(Pimage_url);
                 profile.setUsername(username);
                 profile.setFirst_name(Pfirst_name);
                 profile.setLast_name(Plast_name);
                 profile.setEmail(Pemail);
+                profile.setPhoneNumber(Pphone);
             }
             return profile;
         } catch (SQLException ex) {
@@ -82,5 +84,20 @@ public class ProfileDAO extends DBContext {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public int getprofileId(String username) {
+        String sql = "select account_id from Account where username = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("account_id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 }

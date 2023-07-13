@@ -227,6 +227,7 @@
                                         <div class="product__item">
                                             <div class="product__item__pic set-bg"
                                                  data-setbg="img/product/${product.thumbnail}">
+
                                                 <c:if test = "${product.price > product.sale}">
                                                     <span style="background-color: black; color: white" class="label">Sale</span>
                                                 </c:if>
