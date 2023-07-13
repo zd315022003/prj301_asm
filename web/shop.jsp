@@ -247,17 +247,7 @@
                                             <div class="product__item__text">
                                                 <h6>${product.title}</h6>
                                                 <%-- action add to cart --%>
-                                                <a class="add-cart">
-                                                    <label for="add-${product.id}-to-cart">+ Add To Cart </label>
-                                                    <input type="hidden" name="action" value="add"/>
-                                                    <input type="hidden" name="continueUrl" value="shop"/>
-                                                    <input type="submit" style="display: none"
-                                                           id="add-${product.id}-to-cart"
-                                                           formaction="shopping-cart"
-                                                           formmethod="POST"
-                                                           name="productID"
-                                                           value="${product.id}"/>
-                                                </a>
+                                                <a href="shopdetails?product-id=${product.id}" class="add-cart">+ Add To Cart</a>
                                                 <c:if test = "${product.price > product.sale}">
                                                     <h5 style="color: gray">
                                                         <del>$${product.price}</del>

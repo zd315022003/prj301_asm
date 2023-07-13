@@ -21,11 +21,12 @@ public class Orders {
     private int status;
     private int total_money;
     private int account_id;
+    private String address;
 
     public Orders() {
     }
 
-    public Orders(int order_id, String first_name, String last_name, String email, String phone_number, String note, Date order_date, int status, int total_money, int account_id) {
+    public Orders(int order_id, String first_name, String last_name, String email, String phone_number, String note, Date order_date, int status, int total_money, int account_id, String address) {
         this.order_id = order_id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -36,6 +37,7 @@ public class Orders {
         this.status = status;
         this.total_money = total_money;
         this.account_id = account_id;
+        this.address = address;
     }
 
     public int getOrder_id() {
@@ -118,5 +120,12 @@ public class Orders {
         this.account_id = account_id;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     
 }

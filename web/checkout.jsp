@@ -26,7 +26,7 @@
                             <h4>Check Out</h4>
                             <div class="breadcrumb__links">
                                 <a href="home">Home</a>
-                                <a href="./shop.jsp">Shop</a>
+                                <a href="shop">Shop</a>
                                 <span>Check Out</span>
                             </div>
                         </div>
@@ -79,26 +79,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="acc">
-                                        Create an account?
-                                        <input type="checkbox" id="acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create an account by entering the information below. If you are a returning customer
-                                        please login at the top of the page</p>
-                                </div>
-                                <div class="checkout__input">
-                                    <p>Account Password<span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="diff-acc">
-                                        Note about your order, e.g, special noe for delivery
-                                        <input type="checkbox" id="diff-acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
+<%--                                <div class="checkout__input__checkbox">--%>
+<%--                                    <label for="diff-acc">--%>
+<%--                                        Note about your order, e.g, special noe for delivery--%>
+<%--                                        <input type="checkbox" id="diff-acc">--%>
+<%--                                        <span class="checkmark"></span>--%>
+<%--                                    </label>--%>
+<%--                                </div>--%>
                                 <div class="checkout__input">
                                     <p>Order notes<span>*</span></p>
                                     <input type="text"
@@ -119,29 +106,6 @@
                                         <li>Subtotal <span>$750.99</span></li>
                                         <li>Total <span>$750.99</span></li>
                                     </ul>
-                                    <div class="checkout__input__checkbox">
-                                        <label for="acc-or">
-                                            Create an account?
-                                            <input type="checkbox" id="acc-or">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                        ut labore et dolore magna aliqua.</p>
-                                    <div class="checkout__input__checkbox">
-                                        <label for="payment">
-                                            Check Payment
-                                            <input type="checkbox" id="payment">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <div class="checkout__input__checkbox">
-                                        <label for="paypal">
-                                            Paypal
-                                            <input type="checkbox" id="paypal">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
                                     <button type="submit" class="site-btn">PLACE ORDER</button>
                                 </div>
                             </div>

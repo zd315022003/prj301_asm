@@ -58,12 +58,20 @@ public class ShopDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        Product p = new Product();
         ProductDAO ps = new ProductDAO();
-        List<ProductDTO> lp = new ArrayList<>();
-        p = ps.getProductById(1);
-        lp = ps.getProductByBrandingId(1, p.getBranding_id());
-        System.out.println(lp);
+        String error = request.getParameter("error");
+        String sProductId = request.getParameter("product-id");
+        int productId = 1; //default product
+        try {
+            productId = Integer.parseInt(sProductId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Product p = ps.getProductById(productId);
+        List<ProductDTO> lp = ps.getProductByBrandingId(productId, p.getBranding_id());
+
+        ps.closeConnection();
+        request.setAttribute("error", error);
         request.setAttribute("product", p);
         request.setAttribute("lproduct", lp);
         request.getRequestDispatcher("shop-details.jsp").forward(request, response);
@@ -79,7 +87,7 @@ public class ShopDetailsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     /** 

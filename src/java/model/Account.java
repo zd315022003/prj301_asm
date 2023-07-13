@@ -18,6 +18,7 @@ public class Account {
     private String password;
     private String image_url;
     private int role_id;
+    private boolean status;
 
     public Account() {
     }
@@ -31,6 +32,7 @@ public class Account {
         this.password = password;
         this.image_url = image_url;
         this.role_id = role_id;
+        this.status = true;
     }
 
 //    public Account(String firstname, String lastname, String email, String phonenum, String username, String hash, String s, int i) {
@@ -108,5 +110,13 @@ public class Account {
     public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
-    
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
 }

@@ -12,6 +12,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Product;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -90,14 +91,24 @@ public class ShoppingCartServlet extends HttpServlet {
                 .findFirst().orElse(new Cookie("cart", ""));
 
         if (action != null && action.equals("add")) {
-            addToCart(cart, productID, quantity);
+            try {
+                ProductDAO productDAO = new ProductDAO();
+                Product productById = productDAO.getProductById(Integer.parseInt(productID));
+                if (productById.getQuantity() < Integer.parseInt(quantity)) {
+                    throw new Exception();
+                }
+                addToCart(cart, productID, quantity);
+            } catch (Exception e) {
+                response.sendRedirect(continueUrl + "&error=true");
+                return;
+            }
         } else {
             removeFromCart(cart, productID);
         }
 
         cart.setMaxAge(60 * 60 * 24 * 30);
         response.addCookie(cart);
-        response.sendRedirect(continueUrl == null? "shopping-cart" : continueUrl);
+        response.sendRedirect("shopping-cart");
     }
 
     private void removeFromCart(Cookie cart, String productID) {

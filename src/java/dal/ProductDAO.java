@@ -86,7 +86,8 @@ public class ProductDAO extends DBContext {
             List<ProductDTO> product = new ArrayList<>();
             String query = "SELECT TOP 4 *\n"
                     + "FROM Product\n"
-                    + "ORDER BY sold DESC;";
+                    + "WHERE branding_id = ?\n"
+                    + "AND product_id != ?;";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, branding_id);
             ps.setInt(2, product_id);

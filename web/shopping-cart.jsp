@@ -76,7 +76,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="cart__price">$ ${cartItem.productPrice * cartItem.quantity}</td>
+                                    <td class="cart__price">$ ${Math.round(cartItem.productPrice * cartItem.quantity * 100) / 100}</td>
                                     <td class="cart__close"><label for="remove-${cartItem.productID}">
                                         <i class="fa fa-close"></i>
                                         <input id="remove-${cartItem.productID}"

@@ -52,7 +52,7 @@ public class CartItemDTO {
     }
 
     public double getProductPrice() {
-        return productPrice;
+        return (double) Math.round(productPrice * 100) / 100;
     }
 
     public void setProductPrice(double productPrice) {
