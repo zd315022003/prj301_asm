@@ -53,7 +53,7 @@
                                 <a href="profile"><img style="max-height: 20px; max-width: 20px;" src="./img/icons8-account-30.png" alt=""></a>
                                 <div class="dropdown-content" style="text-align: left">
                                     <c:if test="${sessionScope.account.roleId == 1}">
-                                        <a  href="admin/home">Admin site</a>
+                                        <a  href="./admin/admin.jsp">Admin site</a>
                                     </c:if>
                                     <a  href="profile">Account</a>
                                     <a  href="logout">Logout</a>
@@ -96,7 +96,6 @@
                     <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
                     <a href="./favorite.jsp"><img src="img/icon/heart.png" alt=""></a>
                     <a href="shopping-cart"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                    <div class="price">$0.00</div>
                 </div>
             </div>
         </div>
