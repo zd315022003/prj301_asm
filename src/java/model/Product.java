@@ -4,8 +4,9 @@
  */
 package model;
 
-import java.text.SimpleDateFormat;
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -21,14 +22,14 @@ public class Product {
     private String description;
     private int quantity;
     private int sold;
-    private LocalDate myObj = LocalDate.now();
+    private Date created_at;
     private int branding_id;
     private int filter_price_id;
 
     public Product() {
     }
 
-    public Product(int product_id, String title, double price, double sale, String thumbnail, String description, int quantity, int sold, int branding_id, int filter_price_id) {
+    public Product(int product_id, String title, double price, double sale, String thumbnail, String description, int quantity, int sold, int branding_id, int filter_price_id, Date created_at) {
         this.product_id = product_id;
         this.title = title;
         this.price = price;
@@ -39,6 +40,7 @@ public class Product {
         this.sold = sold;
         this.branding_id = branding_id;
         this.filter_price_id = filter_price_id;
+        this.created_at = created_at;
     }
 
     public int getProduct_id() {
@@ -105,12 +107,13 @@ public class Product {
         this.sold = sold;
     }
 
-    public LocalDate getMyObj() {
-        return myObj;
+    public String getCreated_at() {
+        //format date dd MMM yyyy
+        return created_at.toLocalDate().format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
-    public void setMyObj(LocalDate myObj) {
-        this.myObj = myObj;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
     public int getBranding_id() {
@@ -131,9 +134,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "product_id=" + product_id + ", title=" + title + ", price=" + price + ", sale=" + sale + ", thumbnail=" + thumbnail + ", description=" + description + ", quantity=" + quantity + ", sold=" + sold + ", myObj=" + myObj + ", branding_id=" + branding_id + ", filter_price_id=" + filter_price_id + '}';
+        return "Product{" + "product_id=" + product_id + ", title=" + title + ", price=" + price + ", sale=" + sale + ", thumbnail=" + thumbnail + ", description=" + description + ", quantity=" + quantity + ", sold=" + sold + ", created_at=" + created_at + ", branding_id=" + branding_id + ", filter_price_id=" + filter_price_id + '}';
     }
-    
-    
-    
 }

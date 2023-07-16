@@ -1,29 +1,15 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Add Product - Dashboard HTML Template</title>
-    <link rel="icon" type="image/x-icon" href="./img/icons8-favicon-64.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
-    <!-- https://fonts.google.com/specimen/Roboto -->
-    <link rel="stylesheet" href="css/fontawesome3.min.css" />
-    <!-- https://fontawesome.com/ -->
-    <link rel="stylesheet" href="jquery-ui-datepicker/jquery-ui.min.css" type="text/css" />
-    <!-- http://api.jqueryui.com/datepicker/ -->
-    <link rel="stylesheet" href="css/bootstrap3.min.css" />
-    <!-- https://getbootstrap.com/ -->
-    <link rel="stylesheet" href="css/templatemo3-style.css">
-    <!--
-	Product Admin CSS Template
-	https://templatemo.com/tm-524-product-admin
-	-->
+    <%@include file="admin-component/admin-import.jsp"%>
 </head>
 
 <body>
-    <%@include file="admin-component/nav_properties.jsp" %>
+    <%@include file="admin-component/header.jsp" %>
     <div class="container tm-mt-big tm-mb-big">
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mx-auto">

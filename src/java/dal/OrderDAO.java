@@ -1,9 +1,13 @@
 package dal;
 
 import dto.OrderDTO;
+import model.Orders;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class OrderDAO extends DBContext {
 
@@ -26,7 +30,7 @@ public class OrderDAO extends DBContext {
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,GETDATE()\n"
-                + "           ,0\n"
+                + "           ,1\n"
                 + "           ,0\n"
                 + "           ,?\n"
                 + "           ,?)";
@@ -50,7 +54,7 @@ public class OrderDAO extends DBContext {
     }
 
     private int getLastestOrderId() {
-        String sql = "SELECT TOP 1 order_id FROM Orders ORDER BY order_id DESC";
+        String sql = "SELECT TOP 1 order_id FROM Orders WHERE status = 1 ORDER BY order_id DESC";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -61,5 +65,32 @@ public class OrderDAO extends DBContext {
             System.out.println(e);
         }
         return -1;
+    }
+
+    public List<Orders> getAll() {
+        List<Orders> results = new ArrayList<>();
+        String query = "SELECT * FROM Orders";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Orders orders = new Orders();
+                orders.setOrder_id(rs.getInt("order_id"));
+                orders.setFirst_name(rs.getString("first_name"));
+                orders.setLast_name(rs.getString("last_name"));
+                orders.setEmail(rs.getString("email"));
+                orders.setPhone_number(rs.getString("phone_number"));
+                orders.setNote(rs.getString("note"));
+                orders.setOrder_date(rs.getDate("order_date"));
+                orders.setStatus(rs.getInt("status"));
+                orders.setTotal_money(rs.getInt("total_money"));
+                orders.setAccount_id(rs.getInt("account_id"));
+                orders.setAddress(rs.getString("address"));
+                results.add(orders);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(e.getMessage());
+        }
+        return results;
     }
 }

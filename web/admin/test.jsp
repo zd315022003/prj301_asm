@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <form>
     <select id="mySelect" onchange="toggleDiv()">
       <option value="show">Show Div</option>
@@ -15,9 +16,9 @@
     var divElement = document.getElementById("myDiv");
     
     if (selectOption.value === "show") {
-      divElement.style.display = "block"; // Hi?n th? div n?u giá tr? là "show"
+      divElement.style.display = "block"; // Hi?n th? div n?u giï¿½ tr? lï¿½ "show"
     } else if (selectOption.value === "hide") {
-      divElement.style.display = "none"; // ?n div n?u giá tr? là "hide"
+      divElement.style.display = "none"; // ?n div n?u giï¿½ tr? lï¿½ "hide"
     }
   }
   </script>

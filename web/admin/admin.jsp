@@ -1,29 +1,16 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Product Admin - Dashboard HTML Template</title>
-    <link rel="icon" type="image/x-icon" href="./img/icons8-favicon-64.png">
-    <link rel="icon" type="image/x-icon" href="./img/icons8-favicon-64.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-    <!-- https://fonts.google.com/specimen/Roboto -->
-    <link rel="stylesheet" href="css/fontawesome3.min.css">
-    <!-- https://fontawesome.com/ -->
-    <link rel="stylesheet" href="css/bootstrap3.min.css">
-    <!-- https://getbootstrap.com/ -->
-    <link rel="stylesheet" href="css/templatemo3-style.css">
-    <!--
-	Product Admin CSS Template
-	https://templatemo.com/tm-524-product-admin
-	-->
+    <%@include file="admin-component/admin-import.jsp"%>
 </head>
 
 <body id="reportsPage">
     <div class="" id="home">
-        <%@include file="admin-component/nav_home.jsp" %>
+        <%@include file="admin-component/header.jsp" %>
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -34,114 +21,15 @@
             <div class="row tm-content-row">
                 <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block">
-                        <h2 class="tm-block-title">Latest Hits</h2>
-                            <select class="form-select form-select-lg mb-3" name="year">
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                            </select>
-                        <canvas id="lineChart"></canvas>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block">
-                        <h2 class="tm-block-title">Performance</h2>
+                        <h2 class="tm-block-title">Sold count by Branding</h2>
                         <canvas id="barChart"></canvas>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-taller">
                         <h2 class="tm-block-title">Storage Information</h2>
                         <div id="pieChartContainer">
                             <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
-                        <h2 class="tm-block-title">Notification List</h2>
-                        <div class="tm-notification-items">
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Jessica</b> and <b>6 others</b> sent you new <a href="#"
-                                            class="tm-notification-link">product updates</a>. Check new orders.</p>
-                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                </div>
-                            </div>
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-02.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Oliver Too</b> and <b>6 others</b> sent you existing <a href="#"
-                                            class="tm-notification-link">product updates</a>. Read more reports.</p>
-                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                </div>
-                            </div>
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-03.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Victoria</b> and <b>6 others</b> sent you <a href="#"
-                                            class="tm-notification-link">order updates</a>. Read order information.</p>
-                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                </div>
-                            </div>
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Laura Cute</b> and <b>6 others</b> sent you <a href="#"
-                                            class="tm-notification-link">product records</a>.</p>
-                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                </div>
-                            </div>
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-02.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Samantha</b> and <b>6 others</b> sent you <a href="#"
-                                            class="tm-notification-link">order stuffs</a>.</p>
-                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                </div>
-                            </div>
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-03.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Sophie</b> and <b>6 others</b> sent you <a href="#"
-                                            class="tm-notification-link">product updates</a>.</p>
-                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                </div>
-                            </div>
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Lily A</b> and <b>6 others</b> sent you <a href="#"
-                                            class="tm-notification-link">product updates</a>.</p>
-                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                </div>
-                            </div>
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-02.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Amara</b> and <b>6 others</b> sent you <a href="#"
-                                            class="tm-notification-link">product updates</a>.</p>
-                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                </div>
-                            </div>
-                            <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-03.jpg" alt="Avatar Image"
-                                        class="rounded-circle"></div>
-                                <div class="media-body">
-                                    <p class="mb-2"><b>Cinthela</b> and <b>6 others</b> sent you <a href="#"
-                                            class="tm-notification-link">product updates</a>.</p>
-                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -152,147 +40,25 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ORDER NO.</th>
-                                    <th scope="col">STATUS</th>
                                     <th scope="col">OPERATORS</th>
                                     <th scope="col">LOCATION</th>
-                                    <th scope="col">DISTANCE</th>
-                                    <th scope="col">START DATE</th>
-                                    <th scope="col">EST DELIVERY DUE</th>
+                                    <th scope="col">PHONE NUMBER</th>
+                                    <th scope="col">EMAIL</th>
+                                    <th scope="col">ORDER DATE</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            <jsp:useBean id="orders" scope="request" type="java.util.List<model.Orders>"/>
+                            <c:forEach items="${orders}" var="order">
                                 <tr>
-                                    <th scope="row"><b>#122349</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Oliver Trag</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>485 km</b></td>
-                                    <td>16:00, 12 NOV 2018</td>
-                                    <td>08:00, 18 NOV 2018</td>
+                                    <th scope="row"><b>#${order.order_id}</b></th>
+                                    <td><b>${order.first_name} ${order.last_name}</b></td>
+                                    <td><b>${order.address}</b></td>
+                                    <td><b>${order.phone_number}</b></td>
+                                    <td><b>${order.email}</b></td>
+                                    <td>${order.order_date}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row"><b>#122348</b></th>
-                                    <td>
-                                        <div class="tm-status-circle pending">
-                                        </div>Pending
-                                    </td>
-                                    <td><b>Jacob Miller</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>360 km</b></td>
-                                    <td>11:00, 10 NOV 2018</td>
-                                    <td>04:00, 14 NOV 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122347</b></th>
-                                    <td>
-                                        <div class="tm-status-circle cancelled">
-                                        </div>Cancelled
-                                    </td>
-                                    <td><b>George Wilson</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>340 km</b></td>
-                                    <td>12:00, 22 NOV 2018</td>
-                                    <td>06:00, 28 NOV 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122346</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>William Aung</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>218 km</b></td>
-                                    <td>15:00, 10 NOV 2018</td>
-                                    <td>09:00, 14 NOV 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122345</b></th>
-                                    <td>
-                                        <div class="tm-status-circle pending">
-                                        </div>Pending
-                                    </td>
-                                    <td><b>Harry Ryan</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>280 km</b></td>
-                                    <td>15:00, 11 NOV 2018</td>
-                                    <td>09:00, 17 NOV 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122344</b></th>
-                                    <td>
-                                        <div class="tm-status-circle pending">
-                                        </div>Pending
-                                    </td>
-                                    <td><b>Michael Jones</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>218 km</b></td>
-                                    <td>18:00, 12 OCT 2018</td>
-                                    <td>06:00, 18 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122343</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Timmy Davis</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>218 km</b></td>
-                                    <td>12:00, 10 OCT 2018</td>
-                                    <td>08:00, 18 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122342</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Oscar Phyo</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>420 km</b></td>
-                                    <td>15:30, 06 OCT 2018</td>
-                                    <td>09:30, 16 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122341</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Charlie Brown</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>300 km</b></td>
-                                    <td>11:00, 10 OCT 2018</td>
-                                    <td>03:00, 14 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122340</b></th>
-                                    <td>
-                                        <div class="tm-status-circle cancelled">
-                                        </div>Cancelled
-                                    </td>
-                                    <td><b>Wilson Cookies</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>218 km</b></td>
-                                    <td>17:30, 12 OCT 2018</td>
-                                    <td>08:30, 22 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122339</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Richard Clamon</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>150 km</b></td>
-                                    <td>15:00, 12 OCT 2018</td>
-                                    <td>09:20, 26 OCT 2018</td>
-                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -339,12 +105,10 @@
         barChart, pieChart;
         // DOM is ready
         $(function () {
-            drawLineChart(); // Line Chart
             drawBarChart(); // Bar Chart
             drawPieChart(); // Pie Chart
 
             $(window).resize(function () {
-                updateLineChart();
                 updateBarChart();
             });
         })
@@ -357,85 +121,6 @@
     <!-- chart js -->
     <script>
         const width_threshold = 480;
-        // LINE CHART
-        function drawLineChart() {
-            if ($("#lineChart").length) {
-                ctxLine = document.getElementById("lineChart").getContext("2d");
-                optionsLine = {
-                    scales: {
-                        yAxes: [
-                            {
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: "Hits"
-                                }
-                            }
-                        ]
-                    }
-                };
-
-                // Set aspect ratio based on window width
-                optionsLine.maintainAspectRatio =
-                    $(window).width() < width_threshold ? false : true;
-
-                configLine = {
-                    type: "line",
-                    data: {
-                        labels: [
-                            "January",
-                            "February",
-                            "March",
-                            "April",
-                            "May",
-                            "June",
-                            "July",
-                            "August",
-                            "September",
-                            "October",
-                            "November",
-                            "December"
-                        ],
-                        datasets: [
-                            {
-                                label: "Brand1",
-                                data: [88, 68, 79, 57, 50, 55, 100, 30, 40, 50, 60, 70],
-                                fill: false,
-                                borderColor: "rgb(75, 192, 192)",
-                                cubicInterpolationMode: "monotone",
-                                pointRadius: 0
-                            },
-                            {
-                                label: "Brand2",
-                                data: [33, 45, 37, 21, 55, 74, 69],
-                                fill: false,
-                                borderColor: "rgba(255,99,132,1)",
-                                cubicInterpolationMode: "monotone",
-                                pointRadius: 0
-                            },
-                            {
-                                label: "Brand 3",
-                                data: [44, 19, 38, 46, 85, 66, 79],
-                                fill: false,
-                                borderColor: "rgba(153, 102, 255, 1)",
-                                cubicInterpolationMode: "monotone",
-                                pointRadius: 0
-                            },
-                            {
-                                label: "Brand 4",
-                                data: [14, 39, 28, 86, 45, 50, 80],
-                                fill: false,
-                                borderColor: "#FFFF00",
-                                cubicInterpolationMode: "monotone",
-                                pointRadius: 0
-                            }
-                        ]
-                    },
-                    options: optionsLine
-                };
-
-                lineChart = new Chart(ctxLine, configLine);
-            }
-        }
 
         function drawBarChart() {
             if ($("#barChart").length) {
@@ -452,7 +137,7 @@
                                 },
                                 scaleLabel: {
                                     display: true,
-                                    labelString: "Hits"
+                                    labelString: "Branding"
                                 }
                             }
                         ]
@@ -460,7 +145,7 @@
                 };
 
                 optionsBar.maintainAspectRatio =
-                    $(window).width() < width_threshold ? false : true;
+                    $(window).width() >= width_threshold;
 
                 /**
                  * COLOR CODES
@@ -476,19 +161,23 @@
                 configBar = {
                     type: "horizontalBar",
                     data: {
-                        labels: ["Red", "Aqua", "Green", "Yellow", "Purple", "Orange", "Blue"],
+                        labels: [
+                            <c:forEach items="${brandNames}" var="brandName">
+                                "<c:out value="${brandName}"/>",
+                            </c:forEach>
+                        ],
                         datasets: [
                             {
-                                label: "# of Hits",
-                                data: [33, 40, 28, 49, 58, 38, 44],
+                                label: "Sold count of branding",
+                                data: [
+                                    <c:forEach items="${brandCounts}" var="brandHit">
+                                        <c:out value="${brandHit}"/>,
+                                    </c:forEach>
+                                ],
                                 backgroundColor: [
-                                    "#F7604D",
-                                    "#4ED6B8",
-                                    "#A8D582",
-                                    "#D7D768",
-                                    "#9D66CC",
-                                    "#DB9C3F",
-                                    "#3889FC"
+                                    <c:forEach items="${brandCounts}" var="brandHit">
+                                        "#3889FC",
+                                    </c:forEach>
                                 ],
                                 borderWidth: 0
                             }
@@ -502,8 +191,9 @@
         }
 
         function drawPieChart() {
+            <jsp:useBean id="productInfo" scope="request" type="dto.ProductInfoDTO"/>
             if ($("#pieChart").length) {
-                var chartHeight = 300;      
+                var chartHeight = 300;
 
                 $("#pieChartContainer").css("height", chartHeight + "px");
 
@@ -530,28 +220,21 @@
                     data: {
                         datasets: [
                             {
-                                data: [10, 15,],
+                                data: [${productInfo.soldCount}, ${productInfo.remainingCount},],
                                 backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#FFFF00"],
                                 label: "Storage"
                             }
                         ],
                         labels: [
-                            "Used Storage (18.240GB)",
-                            "System Storage (6.500GB)",
-                            
+                            "Sold count (${productInfo.soldCount})",
+                            "Remaining count (${productInfo.remainingCount})",
+
                         ]
                     },
                     options: optionsPie
                 };
 
                 pieChart = new Chart(ctxPie, configPie);
-            }
-        }
-
-        function updateLineChart() {
-            if (lineChart) {
-                lineChart.options = optionsLine;
-                lineChart.update();
             }
         }
 

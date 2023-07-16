@@ -61,8 +61,16 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>controller.admin.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>AdminHomeServlet</servlet-name>
-        <servlet-class>controller.HomeServlet</servlet-class>
+        <servlet-class>controller.admin.AdminHomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminHomeServlet</servlet-name>
@@ -95,6 +103,70 @@
     <servlet-mapping>
         <servlet-name>checkoutServlet</servlet-name>
         <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>adminCategoryServlet</servlet-name>
+        <servlet-class>controller.admin.AdminCategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminCategoryServlet</servlet-name>
+        <url-pattern>/admin/category</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addCategoryServlet</servlet-name>
+        <servlet-class>controller.admin.AdminAddCategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addCategoryServlet</servlet-name>
+        <url-pattern>/admin/add-category</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>adminBrandingServlet</servlet-name>
+        <servlet-class>controller.admin.AdminBrandingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminBrandingServlet</servlet-name>
+        <url-pattern>/admin/branding</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addBrandingServlet</servlet-name>
+        <servlet-class>controller.admin.AdminAddBrandingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addBrandingServlet</servlet-name>
+        <url-pattern>/admin/add-branding</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>adminProductsServlet</servlet-name>
+        <servlet-class>controller.admin.AdminProductsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminProductsServlet</servlet-name>
+        <url-pattern>/admin/products</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>adminEditProductServlet</servlet-name>
+        <servlet-class>controller.admin.AdminEditProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminEditProductServlet</servlet-name>
+        <url-pattern>/admin/edit-product</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addProductServlet</servlet-name>
+        <servlet-class>controller.admin.AdminAddProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addProductServlet</servlet-name>
+        <url-pattern>/admin/add-product</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>adminAccountsServlet</servlet-name>
+        <servlet-class>controller.admin.AdminAccountsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminAccountsServlet</servlet-name>
+        <url-pattern>/admin/accounts</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -102,7 +102,7 @@ public class CheckoutServlet extends HttpServlet {
         int profileId = profileDAO.getprofileId(username);
         profileDAO.closeConnection();
 
-        OrderDTO orderDTO = new OrderDTO(firstName, lastName, address, phone, email, note, profileId);
+        OrderDTO orderDTO = new OrderDTO(firstName, lastName, email, phone, note, address, profileId);
         OrderDAO orderDAO = new OrderDAO();
         int orderId = orderDAO.createOrder(orderDTO);
 

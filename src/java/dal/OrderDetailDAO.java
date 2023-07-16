@@ -26,11 +26,13 @@ public class OrderDetailDAO extends DBContext {
                 statement.setDouble(4, orderDetailDTO.getCartItem().getProductPrice());
                 statement.executeUpdate();
                 String sql2 = "UPDATE [dbo].[Product]\n" +
-                        "   SET [quantity] = [quantity] - ?\n" +
+                        "   SET [quantity] = [quantity] - ?,\n" +
+                        "       [sold] = [sold] + ?\n" +
                         " WHERE [product_id] = ?";
                 PreparedStatement statement2 = connection.prepareStatement(sql2);
                 statement2.setInt(1, orderDetailDTO.getCartItem().getQuantity());
-                statement2.setInt(2, orderDetailDTO.getCartItem().getProductID());
+                statement2.setInt(2, orderDetailDTO.getCartItem().getQuantity());
+                statement2.setInt(3, orderDetailDTO.getCartItem().getProductID());
                 statement2.executeUpdate();
             }
         } catch (Exception e) {

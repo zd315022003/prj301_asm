@@ -27,7 +27,8 @@ public class BrandDAO extends DBContext {
         try {
             String query = "SELECT [branding_id]\n"
                     + "      ,[name]\n"
-                    + "  FROM [dbo].[Branding]";
+                    + "  FROM [dbo].[Branding]\n" +
+                    "  WHERE [status] = 1";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -57,4 +58,58 @@ public class BrandDAO extends DBContext {
         return new ArrayList<>(results.values());
     }
 
+    public void add(String brandName) {
+        String query = "INSERT INTO [dbo].[Branding]\n"
+                + "           ([name], [status])\n"
+                + "     VALUES\n"
+                + "           (?, 1)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, brandName);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void delete(int id) {
+        String query = "UPDATE [dbo].[Branding]\n"
+                + "   SET [status] = 0\n"
+                + " WHERE [branding_id] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<BrandDTO> getAllBySale() {
+        String query = "SELECT [B].[branding_id], [B].[name], SUM([sold]) AS [count]\n" +
+                "FROM [dbo].[Product] P\n" +
+                "RIGHT JOIN [dbo].[Branding] B on [P].[branding_id] = [b].[branding_id]\n" +
+                "WHERE [B].[status] = 1\n" +
+                "GROUP BY [B].[branding_id], [B].[name]";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            List<BrandDTO> results = new ArrayList<>();
+            while (rs.next()) {
+                BrandDTO brandDTO = new BrandDTO();
+                brandDTO.setId(rs.getInt("branding_id"));
+                brandDTO.setName(rs.getString("name"));
+                brandDTO.setCount(rs.getInt("count"));
+                results.add(brandDTO);
+            }
+            rs.close();
+            ps.close();
+            return results;
+        } catch (SQLException ex) {
+            Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

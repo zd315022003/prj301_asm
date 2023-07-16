@@ -20,7 +20,8 @@ public class ProfileDAO extends DBContext {
     public ProfileDTO getprofile(String username) {
         try {
             String query = "SELECT image_url, first_name, last_name, email, phone_number FROM Account\n"
-                    + "WHERE username = ?\n";
+                    + "WHERE username = ?\n" +
+                    "AND [status] = 1;";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
@@ -54,7 +55,8 @@ public class ProfileDAO extends DBContext {
                 + "  [last_name] = ?,\n"
                 + "  [email] = ?,\n"
                 + "  [password] = ?\n"
-                + "  where [username] = ?";
+                + "  where [username] = ?\n" +
+                "AND [status] = 1;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, acc.getImage_url());
@@ -74,7 +76,8 @@ public class ProfileDAO extends DBContext {
         try {
             String query = " select * from Account\n"
                     + "  where username = ?\n"
-                    + "  and password = ?;";
+                    + "  and password = ?\n" +
+                    "AND [status] = 1;";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, pass);
@@ -87,7 +90,7 @@ public class ProfileDAO extends DBContext {
     }
 
     public int getprofileId(String username) {
-        String sql = "select account_id from Account where username = ?";
+        String sql = "select account_id from Account where username = ? and [status] = 1;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, username);
